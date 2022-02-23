@@ -11,7 +11,7 @@ ansible-playbook -i local, server-setup/local.yml --ask-become-pass
 2. build box
 
 ```
-git clone git@github.com:hi120ki/box-build.git
+git clone https://github.com/hi120ki/box-build.git
 cd box-build
 make setup
 make build
