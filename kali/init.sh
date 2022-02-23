@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -eu
+cd `dirname $0`
 
-(cd provision ; git pull)
+git -C provision pull
 
 vagrant box update
 vagrant up
