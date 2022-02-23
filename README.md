@@ -1,4 +1,8 @@
-# Build CTF Box
+# Build Vagrant Box
+
+This scripts is tested on Ubuntu 20.04
+
+## Install
 
 1. install [server-setup](https://github.com/hi120ki/server-setup)
 
