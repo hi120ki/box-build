@@ -4,7 +4,7 @@
 
 ```
 git clone https://github.com/hi120ki/server-setup.git
-sudo apt update ; sudo apt install -y ansible
+sudo apt-add-repository -y -u ppa:ansible/ansible ; sudo apt install -y ansible
 ansible-playbook -i local, server-setup/local.yml --ask-become-pass
 ```
 
