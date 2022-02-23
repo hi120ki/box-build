@@ -7,10 +7,14 @@ set -eu
 vagrant box update
 vagrant up
 vagrant halt
-vagrant package
-vagrant box remove base_kali -f
-vagrant box add base_kali package.box
-vagrant destroy -f
 
-rm base_kali.box
-mv package.box base_kali.box
+if [ -e "base_kali.box" ]; then
+  rm base_kali.box
+fi
+vagrant package --output base_kali.box
+if vagrant box list | grep base_kali; then
+  vagrant box remove base_kali -f
+fi
+vagrant box add base_kali base_kali.box
+
+# vagrant destroy -f

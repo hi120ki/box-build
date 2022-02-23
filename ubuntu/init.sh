@@ -35,4 +35,4 @@ if vagrant box list | grep base_ctf; then
 fi
 vagrant box add base_ctf base_ctf.box
 
-vagrant destroy -f
+# vagrant destroy -f
