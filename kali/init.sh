@@ -18,4 +18,4 @@ if vagrant box list | grep base_kali; then
 fi
 vagrant box add base_kali base_kali.box
 
-# vagrant destroy -f
+vagrant destroy -f
