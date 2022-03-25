@@ -5,6 +5,7 @@ cd `dirname $0`
 
 git -C provision pull
 
+vagrant destroy -f
 vagrant box update --force
 vagrant up
 vagrant halt
