@@ -1,0 +1,55 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  # vagrant plugin install vagrant-disksize
+  config.disksize.size = "40GB"
+  config.vm.provider "virtualbox" do |vb|
+    vb.cpus = 4
+    vb.memory = 4096
+  end
+
+  config.vm.define "simple" do |server|
+    server.vm.provision "shell", privileged: false, inline: <<-SHELL
+      sudo sed -i.bk -e 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+      sudo apt update
+      sudo apt install -y software-properties-common
+      sudo apt-add-repository --yes --update ppa:ansible/ansible
+      sudo apt install -y ansible
+      git clone https://github.com/hi120ki/lang-env.git
+      cd lang-env ; sudo ansible-playbook -c=local -i local, base.yml
+    SHELL
+    server.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provision/minimal.yml"
+    end
+  end
+
+  config.vm.define "docker" do |server|
+    server.vm.provision "shell", privileged: false, inline: <<-SHELL
+      sudo sed -i.bk -e 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+      sudo apt update
+      sudo apt install -y software-properties-common
+      sudo apt-add-repository --yes --update ppa:ansible/ansible
+      sudo apt install -y ansible
+      git clone https://github.com/hi120ki/lang-env.git
+      cd lang-env ; sudo ansible-playbook -c=local -i local, base.yml
+    SHELL
+    server.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provision/docker.yml"
+    end
+  end
+
+  config.vm.define "ctf" do |server|
+    server.vm.provision "shell", privileged: false, inline: <<-SHELL
+      sudo sed -i.bk -e 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+      sudo apt update
+      sudo apt install -y software-properties-common
+      sudo apt-add-repository --yes --update ppa:ansible/ansible
+      sudo apt install -y ansible
+      git clone https://github.com/hi120ki/lang-env.git
+      cd lang-env ; sudo ansible-playbook -c=local -i local, base.yml
+    SHELL
+    server.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provision/base.yml"
+    end
+  end
+end
