@@ -1,19 +1,21 @@
 #!/bin/bash
 
 set -eu
-cd `dirname $0`
+cd "$(dirname "$0")"
 
-if vagrant box list | grep base_simple_22; then
-  vagrant box remove base_simple_22 -f
-fi
-vagrant box add base_simple_22 base_simple_22.box
+git -C provision pull
 
-if vagrant box list | grep base_docker_22; then
-  vagrant box remove base_docker_22 -f
-fi
-vagrant box add base_docker_22 base_docker_22.box
+function add_or_replace_box() {
+  local base_name=$1
 
-if vagrant box list | grep base_ctf_22; then
-  vagrant box remove base_ctf_22 -f
-fi
-vagrant box add base_ctf_22 base_ctf_22.box
+  if vagrant box list | grep "base_${base_name}_22"; then
+    vagrant box remove "base_${base_name}_22" -f
+  fi
+  vagrant box add "base_${base_name}_22" "base_${base_name}_22.box"
+}
+
+base_names=("simple" "docker" "ctf")
+
+for base_name in "${base_names[@]}"; do
+  add_or_replace_box "$base_name"
+done
