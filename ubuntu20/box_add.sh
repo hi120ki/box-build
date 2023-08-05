@@ -3,8 +3,6 @@
 set -eu
 cd "$(dirname "$0")"
 
-git -C provision pull
-
 function add_or_replace_box() {
   local base_name=$1
 
