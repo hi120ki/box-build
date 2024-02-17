@@ -26,4 +26,12 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "ctf" do |server|
+    server.vm.provision "shell", privileged: false, inline: <<-SHELL
+      sudo sed -i.bk -e 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+    SHELL
+    server.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provision/ctf.yml"
+    end
+  end
 end
