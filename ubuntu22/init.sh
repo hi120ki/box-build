@@ -24,7 +24,8 @@ vagrant box update --force
 vagrant up
 vagrant halt
 
-base_names=("simple" "docker" "ctf")
+# base_names=("simple" "docker" "ctf")
+base_names=("ctf")
 
 for base_name in "${base_names[@]}"; do
   package_and_add_box "$base_name"
