@@ -7,6 +7,5 @@ build: ## build vagrant box
 	bash build.sh &
 
 setup: ## clone ansible project to ./provision
-	cd ubuntu20 ; rm -rf provision ; git clone https://github.com/hi120ki/vm-setup.git provision
 	cd ubuntu22 ; rm -rf provision ; git clone https://github.com/hi120ki/vm-setup.git provision
-	cd kali ; rm -rf provision ; git clone https://github.com/hi120ki/kali-setup.git provision
+	cd ubuntu24 ; rm -rf provision ; git clone https://github.com/hi120ki/vm-setup.git provision
